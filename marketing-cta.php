@@ -1,10 +1,4 @@
-<?php // Silence is golden
-
-/**
-
- * @package IlPostTest
-
- */
+<?php
 /*
 
 Plugin Name: Il Post Marketing CTA
@@ -19,9 +13,11 @@ Author URI: https://mele.io
 
 License: Private
 
-Text Domain: ilpost-test
+Text Domain: marketing-cta
 
 */
+
+const MARKETING_CTA_DEFAULT_PARAGRAPHS = 4;
 
 include plugin_dir_path( __FILE__ ) . 'admin.php';
 include plugin_dir_path( __FILE__ ) . 'filters.php';

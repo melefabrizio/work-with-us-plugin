@@ -4,8 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
-function ilpost_test_menu() {
-	add_options_page('Marketing CTA', 'Marketing CTA', 'administrator', 'marketing-cta', 'marketing_cta_settings_page');
+function marketing_cta_menu() {
+	add_options_page(
+            'Marketing CTA',
+            'Marketing CTA',
+            'administrator',
+            'marketing-cta',
+            'marketing_cta_settings_page'
+    );
 }
 
 function marketing_cta_settings_page() {
@@ -60,21 +66,58 @@ function cta_tag_filter_display() {
 function marketing_cta_register_settings_fields() {
 
     // Content
-	add_settings_section("content", "Contenuto", null, "marketing-cta");
-	add_settings_field("cta_content", "Contenuto CTA", "cta_text_display", "marketing-cta", "content");
+	add_settings_section(
+            "content",
+            "Contenuto",
+            null,
+            "marketing-cta"
+    );
+	add_settings_field(
+            "cta_content",
+            "Contenuto CTA",
+            "cta_text_display",
+            "marketing-cta",
+            "content"
+    );
 
-    register_setting("content", "cta_text");
+    register_setting(
+            "content",
+            "cta_text"
+    );
 
     // Settings
-	add_settings_section("cta_settings", "Impostazioni", null, "marketing-cta");
-    add_settings_field("cta_enabled", "Abilita CTA", "cta_enabled_display", "marketing-cta", "cta_settings");
-	add_settings_field("cta_paragraph", "Paragrafo", "cta_paragraph_display", "marketing-cta", "cta_settings");
-    add_settings_field('cta_tag_filter', "Tag su cui abilitare (separati da virgole)", "cta_tag_filter_display", "marketing-cta", "cta_settings");
-    register_setting("cta_settings", "cta_paragraph");
-    register_setting("cta_settings", "cta_enabled");
-    register_setting("cta_settings", "cta_tag_filter");
+	add_settings_section(
+            "cta_settings",
+            "Impostazioni",
+            null,
+            "marketing-cta"
+    );
+    add_settings_field(
+            "cta_enabled",
+            "Abilita CTA",
+            "cta_enabled_display",
+            "marketing-cta",
+            "cta_settings"
+    );
+	add_settings_field(
+            "cta_paragraph",
+            "Paragrafo",
+            "cta_paragraph_display",
+            "marketing-cta",
+            "cta_settings"
+    );
+    add_settings_field(
+            'cta_tag_filter',
+            "Tag su cui abilitare (separati da virgole)",
+            "cta_tag_filter_display",
+            "marketing-cta",
+            "cta_settings"
+    );
+    register_setting( "cta_settings","cta_paragraph");
+    register_setting( "cta_settings", "cta_enabled");
+    register_setting("cta_settings", "cta_tag_filter" );
 }
 
 //Register menu and settings
-add_action('admin_menu', 'ilpost_test_menu');
+add_action('admin_menu', 'marketing_cta_menu');
 add_action('admin_init', 'marketing_cta_register_settings_fields');

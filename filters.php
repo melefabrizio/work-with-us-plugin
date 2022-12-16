@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\Pure;
+
 if( ! defined( 'ABSPATH' ) ) {
 	die;
 }
@@ -13,7 +15,12 @@ if( ! defined( 'ABSPATH' ) ) {
  *
  * @return string The content with the additional content
  */
-function add_content_after_nth_paragraph(string $content, string $additional_content, int $paragraph = 4): string {
+#[Pure]
+function add_content_after_nth_paragraph(
+	string $content,
+	string $additional_content,
+	int $paragraph
+): string {
 	$paragraphs = explode('</p>', $content);
 
 	if (count($paragraphs) >= $paragraph) {
@@ -38,7 +45,11 @@ add_filter('the_content', static function ($content) {
 		$cta = get_option('cta_text');
 		$paragraph_index = get_option('cta_paragraph');
 
-		$content = add_content_after_nth_paragraph($content, $cta, $paragraph_index ?? 4);
+		$content = add_content_after_nth_paragraph(
+			$content,
+			$cta,
+				$paragraph_index ?? MARKETING_CTA_DEFAULT_PARAGRAPHS
+		);
 	}
 
 	return $content;
